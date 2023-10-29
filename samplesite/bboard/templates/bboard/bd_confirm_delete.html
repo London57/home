@@ -1,0 +1,21 @@
+{% extends 'layout/basic3.html' %}
+
+<!-- {% block script %}
+<script src="bboard/delete_before.js"></script>
+{% endblock %} -->
+
+{% block content %}
+
+<h2>Удаление объявления</h2>
+<h3>{{ ob.title }}</h3>
+<h4>{{ ob.rubric }}</h4>
+<h4>{{ ob.content }}</h4>
+<h4>{{ ob.price }}</h4>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <input class="delete_b" type="submit" value="Удалить">
+        <a class="delete_before" href="{% url 'detail' pk=ob.pk %}">Отмена</a>
+    </form>
+</div>
+{% endblock %}

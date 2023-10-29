@@ -1,0 +1,19 @@
+.comment_solo {
+    margin:1% 1%;
+    padding:3% 8%;
+    border:1px solid rgb(172, 161, 161);
+    border-radius:3px;
+}
+
+.cont_comments {
+    display:flex;
+    justify-content:left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content:space-around;
+}
+.border { 
+    flex-shrink: 0;
+    border: 1px solid black;
+    padding: 20px 20px;
+}

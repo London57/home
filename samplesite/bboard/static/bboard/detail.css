@@ -1,0 +1,65 @@
+a {
+    text-decoration: none;
+    cursor:pointer;
+}
+
+
+.main_section {
+    display: flex;
+}
+
+
+
+.edit {
+    text-decoration: none;
+}
+
+.del {
+    text-decoration: none;
+}
+
+nav {
+    height:25vh;
+    font-size: 24pt;
+    width: 20%;
+    float: left;
+    background:rgb(50, 30, 186);
+    font-style: italic;
+    margin-right: 25px;
+    margin-bottom: 40px;
+}
+nav a{   
+    display:block; 
+    text-decoration: none; 
+    color:white;
+    text-align: center;
+}
+
+nav a:hover{
+    background-color: brown;
+
+}
+
+header {
+    display:flex;
+}
+
+.logo {
+    font-size:40pt;
+    text-transform: uppercase;
+    margin-left: 25%;
+}
+
+.reg {
+    margin-top:1%;
+    margin-left:30%;
+}
+
+.profile {
+    margin-top: 1%;
+    margin-left:30%;
+}
+
+.comments {
+    margin-left:3%;
+}

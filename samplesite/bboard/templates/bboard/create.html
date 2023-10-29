@@ -1,0 +1,12 @@
+{% extends 'layout/basic3.html' %}
+{% block content %}
+    <div id="form">
+        <h1>Добавление объявления</h1>
+        <form method="post">
+            {% csrf_token %}  
+            {{ form.as_p }}
+            <input type="submit" value="Добавить"> 
+            <a href="{% url 'index' %}">Отмена</a>
+        </form>
+    </div>
+{% endblock %}

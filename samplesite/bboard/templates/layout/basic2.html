@@ -1,0 +1,81 @@
+ {% load static %}
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <link rel="stylesheet" type="text/css"  href="{% static 'bboard/style.css' %}">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <meta charset="UTF-8">      
+     <title>{% block title %}Главная{% endblock %}</title>
+ </head>  
+
+
+ <body>
+    <header>
+        <h1 class="logo">Объявления</h1>
+        {% if not user.is_authenticated %}
+        <h1 class="reg"><a href="{% url 'login' %}">Войти</a></h1>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <h1 class="profile"><a href="{% url 'my_profile' %}">Профиль</a></h1>
+        {% endif %}
+    </header>  
+    <section id="2">  
+        <nav class="nav-left">
+            <div>
+                <a href="{% url 'index' %}">Главная</a>
+                {% for rubric in rubrics %}
+                <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }}</a>  <!-- рубрики --> 
+                {% endfor %}
+                {% if user.is_authenticated %}
+                <a href="{% url 'add' %}">Добавить</a>
+                {% endif %}
+       
+                
+            </div>
+        </nav>
+        <h1></h1>
+            <div id="by_rub">
+                {% block rub %} {% endblock %}
+            </div>
+        <div id="cont">
+            <!-- <h2>{{ none }}</h2> -->
+            {% for bb in bbs %}
+                <div id="ob">       
+                    <h2><a id="det" href="{% url 'detail' pk=bb.pk %}">{{ bb.title }}</a></h2> 
+                    <p>{{ bb.content }}</p> 
+                    <p>Цена: {{bb.price}}</p>
+                    <p>Дата публикации:</p>
+                    <p id="data">{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+                    <!-- {% for d in date_list %}
+                    {{d.day}}.{{d.month}}.{{ d.year }}
+                    {% endfor %} -->
+                    {% if bb.user != user %}
+                    <h4><a href="{% url 'profile' bb.user.id %}">{{bb.user.username}}</a></h4>
+                    {% else %}
+                    <h4><a href="{% url 'my_profile' %}">{{bb.user.username}}</a></h4>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <h1>Объявлений пока нет</h1>
+            {% endfor %}
+        </div>
+    </section>
+    
+    {% block paginator %}
+    <div>
+        {% if page.has_previous %}
+        <a href="?page={{page.previous_page_number}}">Назад</a>
+        {% endif %}
+        Часть номер {{page.number}} из {{page.paginator.num_pages}}
+        {% if page.has_next %}
+        <a href="?page={{page.next_page_number}}">Вперед</a>
+        {% endif %}
+        
+    </div>
+    {% endblock %}
+  
+</body>
+
+
+

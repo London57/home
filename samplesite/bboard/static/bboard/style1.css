@@ -1,0 +1,60 @@
+/* body {
+    overflow:visible;
+} */
+/* section #2 {
+} */
+.nav{
+    margin-right: 10px;
+} 
+
+#cont {
+    position: relative;
+    left: 25%;
+    display:flex;
+    justify-content:left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content:space-around; 
+
+}
+
+#ob {
+    margin: 5px 5px; 
+    border: 1px solid black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+
+nav {
+    height:25vh;
+    font-size: 24pt;
+    width: 20%;
+    float: left;
+    background:rgb(50, 30, 186);
+    font-style: italic;
+    margin-right: 25px;
+}
+nav a{   
+    display:block; 
+    text-decoration: none; 
+    color:white;
+    text-align: center;
+}
+
+nav a:hover{
+    background-color: brown;
+
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+}
+
+header h1 {
+    font-size:40pt;
+    text-transform: uppercase;
+    position:relative;
+    margin-left: 35%;
+}

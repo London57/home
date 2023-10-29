@@ -1,0 +1,118 @@
+body {
+    overflow:visible;
+}
+
+header {
+    display:flex;
+}
+
+.logo {
+    font-size:40pt;
+    text-transform: uppercase;
+    margin-left: 25%;
+}
+
+.logo_profile {
+    font-size: 25pt;
+    margin-top:0%;
+}
+
+.reg {
+    margin-top:1%;
+    margin-left:30%;
+}
+
+.profile {
+    margin-top: 3%;
+    margin-left:30%;
+}
+
+.logout {
+    margin-top: 1%;
+    margin-left:15%;
+}
+
+.nav-cont {
+    position: relative;
+}
+
+.nav-left {
+  
+    font-size: 24pt;
+    width: 20%;
+    float: left;
+    background:rgb(50, 30, 186);
+    font-style: italic;
+    margin-bottom: 30%;
+    margin-right: 25px;
+}
+.nav-left a{   
+    display:block; 
+    text-decoration: none; 
+    color:white;
+    text-align: center;
+}
+
+.nav-left a:hover{
+    background-color: brown;
+
+}
+
+.nav-right {
+    margin-left: auto;
+    right:20px;
+    width:400px;
+    font-style: italic;
+    font-size: 19pt;
+    background:rgb(160, 97, 10);
+    padding:5px 5px;
+    height: 400px;    
+}
+
+.all-cont {
+    display: flex;
+}
+
+/* nav a:hover::before {
+    border-bottom-right-radius: 18px;
+} */
+
+/* #form {
+    left: 10px;
+} */
+/* 
+.cont{
+    margin-left: 50px;
+} */
+
+#cont {
+    display:flex;
+    justify-content:left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content:space-around; 
+
+
+
+}
+
+#ob {
+    padding: 20px 20px;
+    margin: 5px 5px; 
+    border: 1px solid black;
+    /* border-top-left-radius: 15px;
+    border-top-right-radius: 15px; */
+}
+
+#det {
+    text-decoration: none;
+}
+
+.edit {
+    text-decoration: none;
+}
+
+.del {
+    text-decoration: none;
+}
+

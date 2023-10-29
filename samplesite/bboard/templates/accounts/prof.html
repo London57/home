@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type='text/css'  href="{% static 'bboard/style.css' %}">
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+    <title>{% block title %}{% endblock %}</title>
+</head>
+    <body>
+        <header>
+            <h1 class="logo">Объявления</h1>
+            {% if user.is_authenticated %}
+            <h1 class="logout"><a href="{% url 'logout' %}">Выйти</a></h1>
+            {% endif %}
+        </header>
+    
+        <nav class="nav-left">
+            <div>
+                <a href="{% url 'index' %}">Главная</a>
+                {% for rubric in rubrics %}
+                <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }}</a>  <!-- рубрики --> 
+                {% endfor %}
+                {% if user.is_authenticated %}
+                <a href="{% url 'add' %}">Добавить</a>
+                {% endif %}
+            </div>
+        </nav>
+        
+        <script src="{% static 'bboard/change.js' %}" defer></script>   
+        <!-- <h1 class="logo_profile">Профиль</h1> -->
+        <div class="all-cont">
+        <section class="">
+            <h2>Ваш профиль {{user.username}} </h2>
+            <h2>Ваши объявления</h2>
+            <div id="cont">
+                {% for bb in bbs %}
+                    <div id="ob">       
+                        <h2><a id="det" href="{% url 'detail' pk=bb.pk %}">{{ bb.title }}</a></h2> 
+                        <p>{{ bb.content }}</p> 
+                        <p>Цена: {{bb.price}}</p>
+                        <p>Дата публикации:</p>
+                        <p id="data">{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+                    </div>
+                    {% empty %}
+                    <h1>Объявлений пока нет</h1>
+                {% endfor %}
+            </div>
+        </section>
+        <nav class="nav-right">
+            <!-- <div id="profile_before">
+                <p id="logo_profile_info">Ваши данные</p>
+                <p id="FLfirst">ФИ: {{user.first_name}} {{user.last_name}}</p>
+                <p id="phone_number">номер телефона:
+                    {{user.phone_number}}
+                </p>
+                <p id="birth_date">
+                    день рождения:
+                    {{user.birth_date|date:'d.m.Y'}} -->
+                    <div id="profile_before">
+                        <div>
+                        <p><span id="logo_profile_info"></span>Ваши данные</p>
+                        <p>ФИ:<span id="FLfirst">{{user.first_name}} {{user.last_name}}</span></p>
+                        <p>номер телефона:<span id="phone_number">{{user.phone_number}}</span> </p>
+                        <p>день рождения:<span id="birth_date">{{user.birth_date|date:'d.m.Y'}}</span></p>
+                        
+                        <button id="editBtn">Изменить</button>
+                        </div>
+                    </div>
+                    
+                    <div id="editModal" class="modal" style="display:none">
+                    <div class="modal-content">
+                        <p> Редактировать профиль</p>
+                        <form id="editForm" method='POST'>
+                            {% csrf_token %}
+                            <label for="editFLname">ФИ:</label>
+                            <input name="FLname" type="text" id="editFLname" required>
+                            <label for="editPhone">номер телефона:</label>
+                            <input name="phone" type="text" id="editPhone" required>
+                            <label for="editDayBorn">день рождения:</label>
+                            <input name="date_birth" type="text" id="editDayBorn" required>
+                
+                            <button type="submit" id="edit">Сохранить</button>
+                        </form>
+                  </div>
+                </div>
+        </nav>
+    </div> 
+    <script>
+    $(document).ready(function() {
+        $("#editForm").submit(function(event) {
+          event.preventDefault(); // Предотвращает отправку обычного запроса формы
+          
+          $.ajax({
+            type: "POST",
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            success: function(response) {
+              $("#message").text(response.message); // Отобразить сообщение об успешном сохранении
+            },
+            error: function(response) {
+              $("#message").text("Ошибка при сохранении данных.");
+            }
+          });
+        });
+      });</script>
+    </body>
+</html>

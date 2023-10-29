@@ -1,0 +1,57 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+
+
+{% block title %} {{bd.title}} {% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type='text/css'  href="{% static 'bboard/detail_2.css' %}"> 
+{% endblock %}
+
+{% block content %}
+<div class="border">
+    <h1> {{ bd.title }} </h1>
+    <h3>Рубрика: {{ bd.rubric.name }} </h3>
+    <h3> {{ bd.content }} </h3>
+    <h4>Цена: {{ bd.price }} </h4>
+    {% if user.is_authenticated %}
+    {% if user == bd.user %}
+    <h4><a class='edit' href="{% url 'post_edit' pk=bd.pk %}">Изменить</a><h4></h4>
+    <h4><a class='del' href="{% url 'delete' pk=bd.pk %}">Удалить</a></h4>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block comment %}
+
+<h3>Комментарии ({{count_comm}})</h3>
+<div class="cont_comments">
+{% for comm in comments %}
+<div class="comment_solo">
+    <p>{{comm.published}}</p>
+    <h4>{{comm.user}}</h4>
+    <p>{{comm.text}}</p>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    {% if comm.user == request.user %}
+    <a href="" data-bs-toggle="modal" data-bs-target="#delete">
+        Удалить
+    </a>
+    {% include 'bboard/delete_comment.html' %}
+    {% endif %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{% static 'bboard/delete_comment.js' %}"></script>
+</div>
+{% empty %}
+<p>Пока нет комментариев</p>
+{% endfor %}
+</div>
+<div>
+    <h3>Добавить комментарий</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Добавить">
+    </form>
+</div>
+{% endblock %}

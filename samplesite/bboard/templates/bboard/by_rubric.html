@@ -1,0 +1,11 @@
+{% extends "layout/basic2.html" %}       
+
+{% block title %} {{ current_rubric.name }} {% endblock %}
+
+{% block rub %}
+    <h2>Рубрика: {{ current_rubric.name }}</h2>   
+{% endblock %}
+   
+{% block content %}
+    <!-- <h2><a id="det" href="{% url 'detail' pk=bb.pk %}">{{ bb.title }} </a></h2> -->
+{% endblock %}

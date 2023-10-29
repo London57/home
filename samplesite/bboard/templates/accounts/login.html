@@ -1,0 +1,12 @@
+{% extends 'layout/basic3.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %} 
+    {% for f in form %}
+    <h3>{{f.name}} {{f}}</h3>
+    {% endfor %}
+    <input type="submit" value="Войти">      
+</form>
+
+<p>Впервые?<a href="{% url 'reg' %}">Зарегистрируйтесь</a></p>
+{% endblock %}
